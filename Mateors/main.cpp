@@ -1,5 +1,6 @@
 #include <iostream>
 #include "raylib.h"
+#include "raymath.h"
 
 
 int main(void)
@@ -29,7 +30,8 @@ int main(void)
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
-
+        
+            Texture2D tex;
         DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
         DrawTextureV(meteor, Vector2{ 100,100 }, WHITE);
         EndDrawing();
