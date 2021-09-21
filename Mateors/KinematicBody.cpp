@@ -22,7 +22,7 @@ void KinematicBody::draw_debug()
 
 
 
-void KinematicBody::draw()
+void KinematicBody::draw(int screenWidth, int screenHeight)
 {
 	//DrawTextureEx(this->sprite, this->position - Vector2{(float)(this->sprite.width/2.0),(float)(this->sprite.height/2.0)}, this->rotation, this->scale, WHITE);
 	DrawTexturePro(this->sprite,
@@ -55,4 +55,12 @@ void KinematicBody::registerPhysicsBody(KinematicBody* body)
 void KinematicBody::deletePhysicsBody(int id)
 {
 	KinematicBody::physicsBodies[id] = nullptr;
+}
+
+void KinematicBody::updateAll(float delta, int screenWidth, int screenHeight)
+{
+	for (auto& body : KinematicBody::physicsBodies)
+	{
+		body->update(delta, screenWidth, screenHeight);
+	}
 }

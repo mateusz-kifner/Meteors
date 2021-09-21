@@ -15,7 +15,7 @@ Meteor::Meteor(std::string name, Texture2D sprite, float radius, Vector2 positio
 	
 }
 
-void Meteor::update(float delta)
+void Meteor::update(float delta, int screenWidth, int screenHeight)
 {
 	
 	this->velocity = this->direction * speed;

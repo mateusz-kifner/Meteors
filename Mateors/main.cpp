@@ -6,6 +6,7 @@
 #include <time.h>
 #include <random>
 #include <string>
+#include <array>
 
 
 bool kinematicBodyColision(KinematicBody k1, KinematicBody k2) {
@@ -31,19 +32,25 @@ int main(void)
     Texture2D meteor = LoadTexture("assets/meteor01.png"); // Load texture from file into GPU memory (VRAM)
     Texture2D spaceship = LoadTexture("assets/spaceship.png"); // Load texture from file into GPU memory (VRAM)
     Texture2D stars = LoadTexture("assets/stars.png"); // Load texture from file into GPU memory (VRAM)
-    Meteor k1 = Meteor("meteor", meteor, 50, Vector2{ 100, 100 });
+    //Meteor k1 = Meteor("meteor", meteor, 50, V/ector2{ 100, 100 });
     Player player = Player("player", spaceship, 50, Vector2{ 200, 200 });
 
-    KinematicBody::registerPhysicsBody(&k1);
+    //KinematicBody::registerPhysicsBody(&k1);
     KinematicBody::registerPhysicsBody(&player);
 
 
     float size = 410;
-    std::vector<Meteor> meteors;
+
+    std::array<Meteor, 20> meteors;
     for (int a = 0; a < 20; a++) {
         float alfa = (a/20.0)*2.0*PI;
-        meteors.push_back(Meteor("meteor"+ std::to_string(a), meteor, 50, Vector2{cos(alfa)*size, sin(alfa)*size}+center));
+        meteors[a] = (Meteor("meteor" + std::to_string(a), meteor, 50, Vector2{cos(alfa)*size, sin(alfa)*size}+center));
+        KinematicBody::registerPhysicsBody(&(meteors[a]));
     }
+
+
+
+
     //--------------------------------------------------------------------------------------
 
     // Main game loop
@@ -52,8 +59,9 @@ int main(void)
         // Update
         //----------------------------------------------------------------------------------
         // TODO: Update your variables here
-        player.update(GetFrameTime(), screenWidth, screenHeight);
-        k1.update(GetFrameTime());
+        //player.update(GetFrameTime(), screenWidth, screenHeight);
+        KinematicBody::updateAll(GetFrameTime(), screenWidth, screenHeight);
+        //k1.update(GetFrameTime());
         KinematicBody::resolveCollisions();
         /*for (auto& m : meteors) {
             m.update(GetFrameTime());
@@ -67,9 +75,9 @@ int main(void)
         ClearBackground(RAYWHITE);
         DrawTextureV(stars, Vector2Zero(), WHITE);
         for (auto& m : meteors) {
-            m.draw();
+            m.draw(screenWidth, screenHeight);
         }
-        k1.draw();
+        //k1.draw();
         player.draw_debug();
         player.draw(screenWidth, screenHeight);
         

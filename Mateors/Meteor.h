@@ -10,6 +10,7 @@ public:
     Vector2 velocity;
     Vector2 direction;
     Meteor(std::string name, Texture2D sprite, float radius, Vector2 position, float rotation = 0, float scale = 1);
-    void update(float delta);
+    Meteor() {}
+    void update(float delta, int screenWidth, int screenHeight);
 };
 
