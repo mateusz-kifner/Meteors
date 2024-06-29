@@ -1,4 +1,4 @@
-workspace "Mateors"
+workspace "Meteors"
 	configurations { "Debug","Debug.DLL", "Release", "Release.DLL" }
 	platforms { "x64"}
 
@@ -57,7 +57,7 @@ project "raylib"
 		}
 		files {"raylib/src/*.h", "raylib/src/*.c"}
 		
-project "Mateors"
+project "Meteors"
 	kind "ConsoleApp"
 	location "%{wks.name}"
 	language "C++"
